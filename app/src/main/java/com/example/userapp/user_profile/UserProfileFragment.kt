@@ -52,28 +52,28 @@ class UserProfileFragment: Fragment() {
         viewModel.userProfileLiveData.observe(viewLifecycleOwner, userProfileObserver)
         viewModel.getUser(id)
 
-        showProfile(view, viewModel.userProfileLiveData.value?.result)
-
     }
 
-    fun showProfile(view: View, data: ResultItem?){
+    fun showProfile(data: ResultItem?){
         if (data !=null ) {
-            view.item_id.text = data.id.toString()
-            view.first_name.text = data.first_name.toString()
-            view.last_name.text = data.last_name.toString()
-            view.website.text = data.website.toString()
-            view.address.text = data.address.toString()
-            view.gender.text = data.gender.toString()
-            view.phone.text = data.phone.toString()
-            view.dob.text = data.dob.toString()
-            view.email.text = data.email.toString()
-            view.status.text = data.status.toString()
+            item_id.text = data.id.toString()
+            first_name.text = data.first_name.toString()
+            last_name.text = data.last_name.toString()
+            website.text = data.website.toString()
+            address.text = data.address.toString()
+            gender.text = data.gender.toString()
+            phone.text = data.phone.toString()
+            dob.text = data.dob.toString()
+            email.text = data.email.toString()
+            status.text = data.status.toString()
         }
 
     }
 
     private val userProfileObserver = Observer<UserResponse> {
-        it.result
+        it?.result?.let {
+            result -> showProfile(result)
+        }
     }
 
 
